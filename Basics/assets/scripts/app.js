@@ -1,15 +1,49 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 
-function add() {
-    console.log(userInput.value);
-    currentResult = currentResult + Number(userInput.value);
-    outputResult(currentResult, '');
+function getUserNumberInput() {
+    return Number(userInput.value);
 }
 
-addBtn.addEventListener('click', add)
+function createAndWriteOutput(operator, resultBeforeCalc, calcNumber) {
+    const calcDescription = `${resultBeforeCalc} ${operator} ${calcNumber}`;
+    outputResult(currentResult, calcDescription);
+}
 
-let calculationDescription = `${defaultResult} + 10`
-let errorMessage = 'An error \noccurred!'
+function add() {
+    const enteredNumber = getUserNumberInput();
+    const initalResult = currentResult;
+    currentResult = currentResult + enteredNumber;
+    createAndWriteOutput("+", initalResult, enteredNumber);
+}
+
+function subtract() {
+    const enteredNumber = getUserNumberInput();
+    const initalResult = currentResult;
+    currentResult = currentResult - enteredNumber;
+    createAndWriteOutput("-", initalResult, enteredNumber);
+}
+
+function multiply() {
+    const enteredNumber = getUserNumberInput();
+    const initalResult = currentResult;
+    currentResult = currentResult * enteredNumber;
+    createAndWriteOutput("*", initalResult, enteredNumber);
+}
+
+function divide() {
+    const enteredNumber = getUserNumberInput();
+    const initalResult = currentResult;
+    currentResult = currentResult / enteredNumber;
+    createAndWriteOutput("/", initalResult, enteredNumber);
+}
+
+addBtn.addEventListener("click", add);
+subtractBtn.addEventListener('click', subtract);
+multiplyBtn.addEventListener('click', multiply);
+divideBtn.addEventListener('click', divide);
+
+let calculationDescription = `${defaultResult} + 10`;
+let errorMessage = "An error \noccurred!";
 
 // outputResult(currentResult, errorMessage);
