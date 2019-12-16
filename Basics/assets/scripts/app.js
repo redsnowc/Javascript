@@ -1,9 +1,26 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
+let logEntries = [];
 
 // Gets input from input field
 function getUserNumberInput() {
     return Number(userInput.value);
+}
+
+function writeToLog(
+    operationIdentifier,
+    prevResult,
+    operationNumber,
+    newResult
+) {
+    const logEntry = {
+        operation: operationIdentifier,
+        prevResult: prevResult,
+        number: operationNumber,
+        results: newResult
+    };
+    logEntries.push(logEntry);
+    console.log(logEntries);
 }
 
 // Generates and writes calculation log
@@ -17,6 +34,7 @@ function add() {
     const initalResult = currentResult;
     currentResult += enteredNumber;
     createAndWriteOutput("+", initalResult, enteredNumber);
+    writeToLog('ADD', initalResult, enteredNumber, currentResult);
 }
 
 function subtract() {
@@ -24,6 +42,7 @@ function subtract() {
     const initalResult = currentResult;
     currentResult -= enteredNumber;
     createAndWriteOutput("-", initalResult, enteredNumber);
+    writeToLog('SUBTRACT', initalResult, enteredNumber, currentResult);
 }
 
 function multiply() {
@@ -31,6 +50,7 @@ function multiply() {
     const initalResult = currentResult;
     currentResult *= enteredNumber;
     createAndWriteOutput("*", initalResult, enteredNumber);
+    writeToLog('MULTIPLY', initalResult, enteredNumber, currentResult);
 }
 
 function divide() {
@@ -38,12 +58,13 @@ function divide() {
     const initalResult = currentResult;
     currentResult /= enteredNumber;
     createAndWriteOutput("/", initalResult, enteredNumber);
+    writeToLog('DIVIDE', initalResult, enteredNumber, currentResult);
 }
 
 addBtn.addEventListener("click", add);
-subtractBtn.addEventListener('click', subtract);
-multiplyBtn.addEventListener('click', multiply);
-divideBtn.addEventListener('click', divide);
+subtractBtn.addEventListener("click", subtract);
+multiplyBtn.addEventListener("click", multiply);
+divideBtn.addEventListener("click", divide);
 
 let calculationDescription = `${defaultResult} + 10`;
 let errorMessage = "An error \noccurred!";
